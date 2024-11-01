@@ -7,27 +7,25 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            Node n1 = new Node(1);
-            Node n2 = new Node(2);
-            Node n3 = new Node(3);
-            Node n4 = new Node(4);
-            Node n5 = new Node(5);
-            Node n6 = new Node(6);
-            Node n7 = new Node(7);
+            // Crear el árbol genealógico
+            var abuelo = new Node<Person>(new Person("Walter Rodríguez", 78));
+            var padre1 = new Node<Person>(new Person("Gustavo Rodríguez", 52));
+            var padre2 = new Node<Person>(new Person("Daniel Rodríguez", 46));
+            var hijo1 = new Node<Person>(new Person("Nicolás Rodríguez", 24));
+            var hijo2 = new Node<Person>(new Person("Patricia González", 48));
+            var hijo3 = new Node<Person>(new Person("Fernanda Rodríguez", 20));
 
-            n1.AddChildren(n2);
-            n1.AddChildren(n3);
+            // Construir el árbol
+            abuelo.AddChildren(padre1);
+            abuelo.AddChildren(padre2);
+            padre1.AddChildren(hijo1);
+            padre1.AddChildren(hijo2);
+            padre2.AddChildren(hijo3);
 
-            n2.AddChildren(n4);
-            n2.AddChildren(n5);
-
-            n3.AddChildren(n6);
-            n3.AddChildren(n7);
-
-            // visitar el árbol aquí
-            SumVisitor visitor = new SumVisitor();
-            n1.Accept(visitor);
-            Console.WriteLine(visitor.Sum);
+            // Usar el visitor para sumar edades
+            var sumVisitor = new SumVisitor();
+            abuelo.Accept(sumVisitor);
+            Console.WriteLine($"La suma de todas las edades es: {sumVisitor.Sum}");
         }
     }
 }
