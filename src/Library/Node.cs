@@ -3,7 +3,7 @@ namespace Library
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public class Node<T>
+    public class Node<T>: INode<T>
     {
         private T data;
         private List<Node<T>> children = new List<Node<T>>();
@@ -31,10 +31,6 @@ namespace Library
         public void Accept(IVisitor<T> visitor)
         {
             visitor.Visit(this);
-            foreach (var child in this.children)
-            {
-                child.Accept(visitor);
-            }
         }
     }
 }

@@ -9,9 +9,18 @@ namespace Library
             get { return this.sum; }
         }
 
-        public void Visit(Node<Person> node)
+        public void Visit(Node<Person> node) 
         {
-            sum += node.Data.Age;
+            this.sum += node.Data.Age;
+            foreach (Node<Person> item in node.Children)
+            {
+                item.Accept(this);
+            }
+        }
+        
+        public int getAgeSum(Node<Person> FirstNode) {
+            FirstNode.Accept(this);
+            return this.sum;
         }
     }
 }
